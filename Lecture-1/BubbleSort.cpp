@@ -9,7 +9,7 @@ void BubbleSort(int *a,int n,int i){
 	}
 
 	// Recursive case
-	for(int j=0;j<=n-2;j++){
+	for(int j=0;j<=n-2-i;j++){
 		if(a[j]>a[j+1]){
 			swap(a[j],a[j+1]);
 		}
