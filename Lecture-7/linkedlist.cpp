@@ -124,17 +124,15 @@ void BubbleSortLL(node* &head){
     c = head;
     p = NULL;
     while(c && c->next){
-      node* n = c->next;
+      n = c->next;
       if(c->data>n->data){
           // Swapping hogi
           if(p == NULL){
-            n = c->next;
             c->next = n->next;
             n->next = c;
             head = p = n;
           }
           else{
-            n = c->next;
             c->next = n->next;
             n->next = c;
             p->next = n;
