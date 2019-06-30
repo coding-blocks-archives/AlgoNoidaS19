@@ -35,7 +35,7 @@ void MergeSort(int *a,int s,int e){
 	// Recursive case
 	// Divide
 	int mid = (s+e)/2;
-	int x[100],y[100];
+	int x[10000],y[10000];
 	for(int i=s;i<=mid;i++){
 		x[i]=a[i];
 	}
@@ -50,7 +50,6 @@ void MergeSort(int *a,int s,int e){
 }
 
 void BubbleSort(int *a,int n){
-
 	for(int i=0;i<n-1;i++){
 		for(int j=0;j<=n-2-i;j++){
 			if(a[j]>a[j+1]){
