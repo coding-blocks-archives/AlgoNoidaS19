@@ -147,10 +147,56 @@ Pair isBalanced(node* root){
 	return p;
 }
 
+node* ArrayToBST(int* arr,int s,int e){
+	// Base case
+	if(s>e){
+		return NULL;
+	}
+	// Recursive case
+	int mid=(s+e)/2;
+	node* root = new node(arr[mid]);
+	root->left = ArrayToBST(arr,s,mid-1);
+	root->right = ArrayToBST(arr,mid+1,e);
+	return root;
+}
+
+node* LevelOrderInput(){
+	node* root = NULL;
+	cout<<"Enter root data : ";
+	int data;
+	cin>>data;
+	if(data == -1){
+		return NULL;
+	}
+	root = new node(data);
+
+	queue<node*> q;
+	q.push(root);
+	while(!q.empty()){
+		node *temp = q.front();
+		q.pop();
+		cout<<"Enter children of "<<temp->data<<" ";
+		int c1,c2;
+		cin>>c1>>c2;
+		if(c1!=-1){
+			temp->left = new node(c1);
+			q.push(temp->left);
+		}
+		if(c2!=-1){
+			temp->right = new node(c2);
+			q.push(temp->right);
+		}
+	}
+	return root;
+}
 
 int main(){
 
-	node* root=BuildTree();
+	// node* root=BuildTree();
+	int arr[]={1,3,5,7,8,9,10,11,12};
+	int n = sizeof(arr)/sizeof(int);
+	// node* root = ArrayToBST(arr,0,n-1);
+	node* root = LevelOrderInput();
 
 	// PreOrder(root);
 	// cout<<endl;
@@ -158,13 +204,13 @@ int main(){
 	// cout<<endl;
 	// PostOrder(root);
 	// cout<<endl;
-	// PrintLevelOrder(root);
-	if(isBST(root)){
-		cout<<"BST"<<endl;
-	}
-	else{
-		cout<<"Not a BST"<<endl;
-	}
+	PrintLevelOrder(root);
+	// if(isBST(root)){
+	// 	cout<<"BST"<<endl;
+	// }
+	// else{
+	// 	cout<<"Not a BST"<<endl;
+	// }
 
 	Pair p = isBalanced(root);
 	if(p.balanced){
