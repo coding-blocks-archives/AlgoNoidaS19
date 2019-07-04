@@ -1,5 +1,7 @@
 #include <iostream>
 #include <queue>
+#include <climits>
+#include <cmath>
 using namespace std;
 
 class node{
@@ -100,20 +102,77 @@ void PrintLevelOrder(node* root){
 	}
 }
 
+bool isBST(node* root,int min=INT_MIN,int max = INT_MAX){
+	// Base case
+	if(root==NULL){
+		return true;
+	}
+	// Recursive case
+	if(root->data<=max && root->data>=min && isBST(root->left,min,root->data) && isBST(root->right,root->data,max)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+class Pair{
+public:
+	int height;
+	bool balanced;
+};
+
+Pair isBalanced(node* root){
+	Pair p;
+	// base case
+	if(root==NULL){
+		p.height=0;
+		p.balanced = true;
+		return p;
+	}
+
+	// Recursive case
+	Pair left = isBalanced(root->left);
+	Pair right = isBalanced(root->right);
+
+	//Height
+	p.height = max(left.height,right.height)+1;
+
+	if(left.balanced && right.balanced && abs(left.height-right.height)<=1){
+		p.balanced = true;
+	}
+	else{
+		p.balanced = false;
+	}
+	return p;
+}
+
 
 int main(){
 
 	node* root=BuildTree();
 
-	PreOrder(root);
-	cout<<endl;
-	InOrder(root);
-	cout<<endl;
-	PostOrder(root);
-	cout<<endl;
-	PrintLevelOrder(root);
+	// PreOrder(root);
+	// cout<<endl;
+	// InOrder(root);
+	// cout<<endl;
+	// PostOrder(root);
+	// cout<<endl;
+	// PrintLevelOrder(root);
+	if(isBST(root)){
+		cout<<"BST"<<endl;
+	}
+	else{
+		cout<<"Not a BST"<<endl;
+	}
 
-
+	Pair p = isBalanced(root);
+	if(p.balanced){
+		cout<<"balanced"<<endl;
+	}
+	else{
+		cout<<"Not balanced"<<endl;
+	}
 
 
 
