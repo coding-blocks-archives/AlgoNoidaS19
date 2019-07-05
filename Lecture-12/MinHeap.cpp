@@ -1,6 +1,8 @@
 // MinHeap
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
 class Minheap{
@@ -58,10 +60,61 @@ public:
 
 };
 
+
+class Comparator{
+public:
+	bool operator()(int a,int b){ // Functor
+		return a>b;
+	}
+};
+
+void Print(priority_queue<int,vector<int>,Comparator> h){
+	while(!h.empty()){
+		cout<<h.top()<<" ";
+		h.pop();
+	}	
+	cout<<endl;
+}
+bool Meracomparator(int a,int b){
+	cout<<a<<" "<<b<<endl;
+	return a<b;
+}
+
 int main(){
+	// Minheap h;
+	int arr[]={5,4,32,1,1};
+	int n=sizeof(arr)/sizeof(int);
 
-	Minheap h;
-
+	sort(arr,arr+n,Meracomparator);
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<endl;
+	priority_queue<int,vector<int>,Comparator> h;
+	int k =3;
+	int number;
+	int size = 1;
+	// while(1){
+	// 	cin>>number;
+	// 	if(number == -1){
+	// 		// Print the heap
+	// 		Print(h);
+	// 	}
+	// 	else{
+	// 		if(size<=k){
+	// 			// Insert in heap
+	// 			h.push(number);
+	// 			size++;
+	// 		}
+	// 		else{
+	// 			// Check and then push
+	// 			if(h.top()<number){
+	// 				h.pop();
+	// 				h.push(number);
+	// 			}
+	// 		}
+	// 	}
+	// }
 	h.push(10);
 	h.push(2);
 	h.push(5);
