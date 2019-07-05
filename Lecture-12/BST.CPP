@@ -9,10 +9,7 @@ public:
 	int data;
 	node* left;
 	node* right;
-
-	node(int d):data(d),left(NULL),right(NULL){
-
-	}
+	node(int d):data(d),left(NULL),right(NULL){}
 };
 
 node* InsertInBST(node* root,int data){
