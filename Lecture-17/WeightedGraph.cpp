@@ -30,12 +30,15 @@ public:
 	int SSSP(T src,T des){
 		map<T,int> dist;
 		set<pair<int,T> > s;
+		map<T,T> parent;
 
 		for(auto node:h){
 			dist[node.first] = INT_MAX;
 		}
 
 		dist[src] = 0;
+		parent[src] = src;
+
 		s.insert(make_pair(0,src));
 
 		while(!s.empty()){
@@ -47,7 +50,7 @@ public:
 
 			for(auto children:h[node]){
 				if(dist[children.first]>parent_dist+children.second){
-
+					parent[children.first] = node;
 					auto f = s.find(make_pair(dist[children.first],children.first));
 					if(f!=s.end()){
 						s.erase(f);
@@ -62,6 +65,13 @@ public:
 		for(auto node:dist){
 			cout<<"Distance of "<<node.first<<" from "<<src<<" is "<<node.second<<endl;
 		}
+
+		T temp = des;
+		while(temp!=src){
+			cout<<temp<<"<--";
+			temp = parent[temp];
+		}
+		cout<<src<<endl;
 
 		return dist[des];
 	}
